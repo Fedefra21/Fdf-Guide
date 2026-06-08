@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>FDF Guide</title>
+  <meta name="description" content="Guida personale ristoranti con mappa, foto, filtri e classifica." />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#7b2230" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#d58a96" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="FDF Guide" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.4rem);
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;
+      --color-bg:#f7f2eb;--color-surface:#fbf7f1;--color-surface-2:#fffdfa;--color-surface-offset:#efe4db;--color-border:#ccb4a7;--color-divider:#d7c1b6;--color-text:#331d20;--color-text-muted:#715659;--color-text-faint:#9a7c7f;--color-text-inverse:#fff8f3;--color-primary:#7b2230;--color-primary-hover:#651b28;--color-primary-highlight:#ecd5d8;--color-gold:#b98631;--radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.875rem;--radius-xl:1.25rem;--radius-full:9999px;--shadow-sm:0 1px 2px rgba(51,29,32,.05);--shadow-md:0 10px 26px rgba(51,29,32,.10);--shadow-lg:0 24px 54px rgba(51,29,32,.16);--font-display:'Cormorant Garamond', Georgia, serif;--font-body:'Inter', system-ui, sans-serif;--transition:180ms cubic-bezier(.16,1,.3,1);
+    }
+    [data-theme="dark"] {
+      --color-bg:#1f1718;--color-surface:#281d1f;--color-surface-2:#302325;--color-surface-offset:#342628;--color-border:#66484e;--color-divider:#503a3f;--color-text:#f5eae3;--color-text-muted:#dbc6c0;--color-text-faint:#ac8d8f;--color-text-inverse:#2a1a1d;--color-primary:#d58a96;--color-primary-hover:#e3a0aa;--color-primary-highlight:#43252c;--color-gold:#efc067;--shadow-sm:0 1px 2px rgba(0,0,0,.22);--shadow-md:0 10px 26px rgba(0,0,0,.30);--shadow-lg:0 24px 54px rgba(0,0,0,.42);
+    }
+    *,:before,:after{box-sizing:border-box} html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth} body{margin:0;min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);line-height:1.6;color:var(--color-text);background:radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent 30%),linear-gradient(180deg,var(--color-bg),var(--color-surface))} img,svg{display:block;max-width:100%} button,input,textarea,select{font:inherit;color:inherit} button{cursor:pointer} a,button,input,textarea,select{transition:all var(--transition)} :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px}
+    .shell{max-width:1240px;margin:0 auto;padding:var(--space-4)} .skip-link{position:absolute;left:var(--space-4);top:-3rem;background:var(--color-primary);color:var(--color-text-inverse);padding:var(--space-2) var(--space-3);border-radius:var(--radius-md)} .skip-link:focus{top:var(--space-4)}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);padding:var(--space-4) 0 var(--space-6)} .brand{display:flex;align-items:center;gap:var(--space-3)} .brand-mark{width:58px;height:58px;border-radius:18px;background:linear-gradient(180deg,var(--color-primary),var(--color-primary-hover));color:var(--color-text-inverse);display:grid;place-items:center;box-shadow:var(--shadow-md)} .brand-copy small{display:block;color:var(--color-text-muted);font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase}.brand-copy strong{font-family:var(--font-display);font-size:var(--text-xl);line-height:1}
+    .btn,.icon-btn{border:1px solid color-mix(in srgb, var(--color-text) 12%, transparent);background:rgba(255,253,250,.82);color:var(--color-text);border-radius:var(--radius-full);min-height:44px;padding:0 var(--space-4);box-shadow:var(--shadow-sm)} .btn-primary{background:var(--color-primary);color:var(--color-text-inverse);border-color:transparent}.btn:hover,.icon-btn:hover{background:var(--color-surface-offset)} .btn-primary:hover{background:var(--color-primary-hover)} .icon-btn{width:44px;padding:0;display:grid;place-items:center}
+    .actions{display:flex;gap:var(--space-2);flex-wrap:wrap}
+    .hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-6);margin-bottom:var(--space-6)} .glass,.panel{background:rgba(255,253,250,.78);backdrop-filter:blur(14px);border:1px solid color-mix(in srgb, var(--color-text) 10%, transparent);border-radius:var(--radius-xl);box-shadow:var(--shadow-md)} .hero{padding:clamp(var(--space-6),4vw,var(--space-10));position:relative;overflow:hidden}.hero:after{content:"";position:absolute;right:-4rem;bottom:-4rem;width:16rem;height:16rem;background:radial-gradient(circle,color-mix(in srgb, var(--color-primary) 16%, transparent),transparent 70%)}
+    .eyebrow{display:inline-flex;align-items:center;gap:var(--space-2);background:var(--color-primary-highlight);color:var(--color-primary);border-radius:var(--radius-full);padding:.45rem .85rem;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.12em;font-weight:800} h1,h2,h3,h4{margin:0;line-height:1.05} h1{margin-top:var(--space-4);font-family:var(--font-display);font-size:clamp(3rem,6vw,5.2rem);max-width:10ch} h2{font-family:var(--font-display);font-size:var(--text-xl)} h3{font-family:var(--font-display);font-size:1.6rem}
+    .muted{color:var(--color-text-muted)} .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);margin-top:var(--space-6)} .stat{padding:var(--space-4);background:var(--color-surface-2);border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);border-radius:var(--radius-lg)} .stat strong{display:block;font-size:var(--text-lg)} .stat span{display:block;font-size:var(--text-sm);color:var(--color-text-muted)}
+    .phone-preview{padding:var(--space-5);display:grid;gap:var(--space-4)} .app-note{display:flex;gap:var(--space-3);align-items:center;padding:var(--space-4);border-radius:22px;background:var(--color-surface-2);border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent)} .app-icon{width:72px;height:72px;border-radius:22px;background:linear-gradient(180deg,var(--color-primary),var(--color-primary-hover));color:var(--color-text-inverse);display:grid;place-items:center;box-shadow:var(--shadow-md)} .iphone{margin-inline:auto;width:min(320px,100%);padding:14px;background:#181516;border-radius:38px;box-shadow:var(--shadow-lg)} .iphone-screen{background:linear-gradient(180deg,#fffaf6,#f4e7dd);border-radius:28px;padding:14px;min-height:600px;overflow:hidden} .dynamic-island{width:110px;height:26px;border-radius:999px;background:#1e1718;margin:0 auto 18px} .mini-header{display:flex;justify-content:space-between;align-items:center}.mini-brand{display:flex;gap:10px;align-items:center}.mini-icon{width:40px;height:40px;border-radius:15px;background:#7b2230;color:#fff8f3;display:grid;place-items:center} .mini-card{margin-top:14px;padding:16px;border-radius:22px;background:rgba(255,255,255,.75);border:1px solid rgba(51,29,32,.06)} .mini-card h4{font-size:1.1rem;font-family:var(--font-display)} .mini-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.mini-pill{padding:6px 10px;border-radius:999px;background:#f0dfd6;color:#7b2230;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.mini-list{display:grid;gap:10px;margin-top:14px}.mini-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:18px;background:#fffdfb;border:1px solid rgba(51,29,32,.06)}
+    .install-tip{padding:var(--space-4);border-radius:20px;background:var(--color-surface-2);border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent)} .install-tip strong{display:block;margin-bottom:6px} .install-steps{margin:10px 0 0;padding-left:1.1rem;color:var(--color-text-muted)} .install-steps li{margin:.35rem 0}
+    .dashboard{display:grid;grid-template-columns:380px 1fr;gap:var(--space-6)} .panel{padding:var(--space-5)} .sticky{position:sticky;top:16px} .panel-head{display:flex;justify-content:space-between;gap:var(--space-3);align-items:flex-start;margin-bottom:var(--space-4)} .sub{font-size:var(--text-sm);color:var(--color-text-muted)} .form-grid{display:grid;gap:var(--space-4)} .field{display:grid;gap:var(--space-2)} .field label{font-size:var(--text-sm);font-weight:800}.field input,.field textarea,.field select{width:100%;border-radius:var(--radius-lg);border:1px solid color-mix(in srgb, var(--color-text) 12%, transparent);background:var(--color-surface-2);padding:.92rem 1rem}.field textarea{min-height:90px;resize:vertical}.split{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)} .triple{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--space-3)} .helper{font-size:var(--text-xs);color:var(--color-text-muted)} .geo-row{display:flex;gap:var(--space-2);flex-wrap:wrap}
+    .stars-group{display:grid;gap:var(--space-4)} .stars-row{display:grid;grid-template-columns:88px 1fr auto;gap:var(--space-3);align-items:center}.star-input{display:flex;gap:.25rem;flex-wrap:wrap}.star{width:34px;height:34px;border-radius:50%;border:1px solid color-mix(in srgb, var(--color-text) 12%, transparent);background:var(--color-surface-2);color:#c4a26c;display:grid;place-items:center;padding:0}.star.active{background:#fff0d1;border-color:#e2bf87;color:#9a6a1a}.score-badge{min-width:42px;text-align:center;border-radius:var(--radius-full);background:var(--color-surface-offset);padding:.35rem .6rem;font-size:var(--text-sm);font-weight:800}
+    .photo-preview,.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:var(--space-2)} .thumb{aspect-ratio:1/1;border-radius:var(--radius-lg);overflow:hidden;background:var(--color-surface-offset);border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent)} .gallery .thumb{aspect-ratio:4/3}.thumb img{width:100%;height:100%;object-fit:cover}
+    .content-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--space-6);margin-top:var(--space-6)} .map-panel{padding:0;overflow:hidden}.map-top{padding:var(--space-5) var(--space-5) 0}.map-shell{padding:var(--space-4) var(--space-5) var(--space-5)}
+    .mapbox{position:relative;width:100%;min-height:420px;border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#ead7ca,#f7efe8);border:1px solid color-mix(in srgb, var(--color-text) 10%, transparent);box-shadow:var(--shadow-sm)}
+    .map-grid{position:absolute;inset:0;background-image:linear-gradient(color-mix(in srgb, var(--color-text) 5%, transparent) 1px, transparent 1px),linear-gradient(90deg, color-mix(in srgb, var(--color-text) 5%, transparent) 1px, transparent 1px);background-size:48px 48px;opacity:.55}
+    .map-water{position:absolute;inset:auto -10% -10% auto;width:48%;height:52%;background:radial-gradient(circle at 30% 30%, rgba(89,144,188,.22), transparent 65%)}
+    .map-controls{position:absolute;top:14px;right:14px;display:grid;gap:10px}.map-zoom{width:42px;height:42px;border-radius:50%;border:1px solid color-mix(in srgb, var(--color-text) 10%, transparent);background:rgba(255,253,250,.92);display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+    .map-marker{position:absolute;transform:translate(-50%,-100%);cursor:pointer}.map-pin{width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--color-primary);transform:rotate(-45deg);box-shadow:0 10px 18px rgba(123,34,48,.2);border:2px solid rgba(255,248,243,.9)} .map-pin::after{content:"";position:absolute;inset:5px;border-radius:50%;background:#fff8f3}
+    .map-marker.active .map-pin{background:var(--color-gold)}
+    .map-marker span{position:absolute;left:50%;top:-8px;transform:translate(-50%,-100%);white-space:nowrap;background:rgba(255,253,250,.95);color:var(--color-text);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);box-shadow:var(--shadow-sm);display:none}
+    .map-marker:hover span,.map-marker.active span{display:block}
+    .map-footer{display:flex;justify-content:space-between;gap:var(--space-3);align-items:center;flex-wrap:wrap;margin-top:var(--space-4)} .map-chip{padding:.45rem .8rem;border-radius:999px;background:var(--color-surface-offset);font-size:var(--text-xs);font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-muted)}
+    .toolbar{display:flex;justify-content:space-between;gap:var(--space-3);align-items:center;flex-wrap:wrap;margin-bottom:var(--space-4)} .search{flex:1 1 280px;display:flex;align-items:center;gap:var(--space-2);background:var(--color-surface-2);border:1px solid color-mix(in srgb, var(--color-text) 10%, transparent);border-radius:var(--radius-full);padding:.25rem .5rem .25rem 1rem}.search input{border:0;background:transparent;width:100%;min-height:42px} .legend,.category-pills{display:flex;gap:var(--space-2);flex-wrap:wrap}.chip{padding:.5rem .8rem;border-radius:999px;background:var(--color-surface-offset);font-size:var(--text-xs);font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-muted)} .chip.active{background:var(--color-primary-highlight);color:var(--color-primary)} .filter-row{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3)}
+    .ranking-list{display:grid;gap:var(--space-3)} .rank-item{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-surface-2);border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent)} .rank-badge{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--color-primary-highlight);color:var(--color-primary);font-weight:800}
+    .restaurant-list{display:grid;gap:var(--space-4)} .card{background:rgba(255,253,250,.82);border:1px solid color-mix(in srgb, var(--color-text) 10%, transparent);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm);overflow:hidden}.card-body{padding:var(--space-5);display:grid;gap:var(--space-4)} .card-header{display:flex;justify-content:space-between;gap:var(--space-4);align-items:start}.meta{color:var(--color-text-muted);font-size:var(--text-sm)} .overall-pill{background:var(--color-primary);color:var(--color-text-inverse);border-radius:var(--radius-full);padding:.55rem .8rem;font-weight:800;min-width:60px;text-align:center}.price-pill{background:color-mix(in srgb, var(--color-gold) 18%, transparent);color:var(--color-gold);border-radius:999px;padding:.4rem .7rem;font-size:var(--text-xs);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.rating-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3)} .rating-box{padding:var(--space-3);border-radius:var(--radius-lg);background:var(--color-surface-offset);border:1px solid color-mix(in srgb, var(--color-text) 8%, transparent)} .rating-box span{display:block;color:var(--color-text-muted);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em}.rating-box strong{display:block;margin-top:.2rem}.card-actions{display:flex;gap:var(--space-2);flex-wrap:wrap}.empty{padding:var(--space-12) var(--space-6);text-align:center;background:var(--color-surface);border:1px dashed var(--color-divider);border-radius:var(--radius-xl);color:var(--color-text-muted)}
+    .overlay{position:fixed;inset:0;background:rgba(28,16,18,.38);backdrop-filter:blur(8px);display:none;align-items:end;justify-content:center;padding:var(--space-4);z-index:999}.overlay.open{display:flex}.sheet{width:min(920px,100%);max-height:92dvh;overflow:auto;background:rgba(255,253,250,.92);border:1px solid color-mix(in srgb, var(--color-text) 10%, transparent);border-radius:28px;box-shadow:var(--shadow-lg);padding:var(--space-6)} .sheet-top{display:flex;justify-content:space-between;gap:var(--space-3);align-items:flex-start;margin-bottom:var(--space-5)} .sheet-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--space-5)} .hero-gallery{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2)} .hero-gallery .thumb:first-child{grid-column:1 / -1;aspect-ratio:16/10}.detail-stack{display:grid;gap:var(--space-3)} .detail-line{display:flex;justify-content:space-between;gap:var(--space-3);padding-bottom:var(--space-2);border-bottom:1px dashed var(--color-divider)}
+    .footer-note{color:var(--color-text-muted);font-size:var(--text-sm);margin:var(--space-8) 0 var(--space-4)}
+    @media (max-width:1100px){.hero-wrap,.dashboard,.content-grid,.sheet-grid{grid-template-columns:1fr}.stats,.filter-row,.rating-grid,.triple{grid-template-columns:repeat(2,1fr)}.sticky{position:static}}
+    @media (max-width:720px){.shell{padding:var(--space-3)}.topbar,.card-header,.toolbar,.sheet-top{flex-direction:column;align-items:stretch}.actions{width:100%;justify-content:space-between}.stats,.split,.triple,.stars-row,.filter-row,.rating-grid{grid-template-columns:1fr}.mapbox{min-height:320px}.sheet{padding:var(--space-4)}.hero-gallery{grid-template-columns:1fr}}
+    @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <a href="#contenuto" class="skip-link">Vai al contenuto</a>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand" aria-label="FDF Guide">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 72 72" width="42" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="36" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="currentColor">*</text>
+            <text x="36" y="61" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="16" font-weight="700" fill="currentColor">FDF</text>
+          </svg>
+        </div>
+        <div class="brand-copy"><small>Guida personale ristoranti</small><strong>FDF Guide</strong></div>
+      </div>
+      <div class="actions">
+        <button class="icon-btn" type="button" id="themeToggle" aria-label="Cambia tema">◐</button>
+        <button class="btn" type="button" id="exportBtn">Esporta JSON</button>
+        <label class="btn" for="importInput" style="display:inline-flex;align-items:center;justify-content:center;">Importa</label>
+        <input id="importInput" type="file" accept="application/json" hidden>
+      </div>
+    </header>
+
+    <main id="contenuto">
+      <section class="hero-wrap">
+        <article class="glass hero">
+          <span class="eyebrow">Il tuo diario culinario</span>
+          <h1>Una guida privata, raffinata e fatta bene.</h1>
+          <p class="muted">Salva ogni ristorante visitato con categorie, fasce di prezzo, foto, classifica e una mappa integrata leggera che non dipende da servizi esterni, così puoi aprire il file più facilmente anche su iPhone.</p>
+          <div class="stats">
+            <div class="stat"><strong id="totalCount">0</strong><span>Ristoranti</span></div>
+            <div class="stat"><strong id="avgOverall">0.0</strong><span>Media generale</span></div>
+            <div class="stat"><strong id="bestCity">—</strong><span>Città più frequente</span></div>
+            <div class="stat"><strong id="bestCategory">—</strong><span>Categoria top</span></div>
+          </div>
+        </article>
+
+        <aside class="glass phone-preview">
+          <div class="app-note">
+            <div class="app-icon" aria-hidden="true">
+              <svg viewBox="0 0 72 72" width="44" height="44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="36" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="currentColor">*</text>
+            <text x="36" y="61" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="16" font-weight="700" fill="currentColor">FDF</text>
+          </svg>
+            </div>
+            <div>
+              <strong style="display:block">Nuova icona app</strong>
+              <span class="sub">Asterisco elegante, bordeaux, con firma FDF in corsivo.</span>
+            </div>
+          </div>
+
+          <div class="iphone" aria-label="Mockup schermata iniziale iPhone">
+            <div class="iphone-screen">
+              <div class="dynamic-island" aria-hidden="true"></div>
+              <div class="mini-header">
+                <div class="mini-brand">
+                  <div class="mini-icon">
+                    <svg viewBox="0 0 72 72" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="36" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="currentColor">*</text>
+            <text x="36" y="61" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="16" font-weight="700" fill="currentColor">FDF</text>
+          </svg>
+                  </div>
+                  <div>
+                    <div style="font-size:12px;color:#715659;text-transform:uppercase;letter-spacing:.12em;font-weight:800">FDF Guide</div>
+                    <div style="font-family:var(--font-display);font-size:1.7rem;color:#331d20;line-height:1">Home</div>
+                  </div>
+                </div>
+                <div style="font-weight:800;color:#7b2230">⋯</div>
+              </div>
+              <div class="mini-card">
+                <h4>I migliori posti</h4>
+                <div class="mini-pills"><span class="mini-pill">Messina</span><span class="mini-pill">€€</span><span class="mini-pill">Cena</span></div>
+                <div class="mini-list">
+                  <div class="mini-row"><span>1. Porto Rosso</span><strong>4.9</strong></div>
+                  <div class="mini-row"><span>2. Corte Bianca</span><strong>4.8</strong></div>
+                  <div class="mini-row"><span>3. Piatto Nobile</span><strong>4.7</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="install-tip">
+            <strong>Per aprirla su Safari e aggiungerla alla Home</strong>
+            <span class="sub">Questa versione evita dipendenze esterne per la mappa, così è più compatibile come singolo file HTML. Per iPhone, il metodo più semplice è caricarla su iCloud Drive o Files e poi aprirla con Safari dal link condiviso o da un piccolo hosting statico.</span>
+            <ol class="install-steps">
+              <li>Salva il file su iCloud Drive oppure su un hosting statico semplice.</li>
+              <li>Apri il link in Safari su iPhone.</li>
+              <li>Tocca Condividi.</li>
+              <li>Scegli “Aggiungi a Home”.</li>
+            </ol>
+          </div>
+        </aside>
+      </section>
+
+      <section class="dashboard">
+        <section class="panel sticky">
+          <div class="panel-head">
+            <div>
+              <h2>Aggiungi ristorante</h2>
+              <p class="sub">Versione chic completa, personale e più compatibile su iPhone.</p>
+            </div>
+          </div>
+          <form id="restaurantForm" class="form-grid">
+            <div class="field"><label for="name">Nome ristorante</label><input id="name" name="name" placeholder="Es. Trattoria del Porto" required /></div>
+            <div class="split">
+              <div class="field"><label for="city">Città</label><input id="city" name="city" placeholder="Messina" required /></div>
+              <div class="field"><label for="visitedOn">Data visita</label><input id="visitedOn" name="visitedOn" type="date" /></div>
+            </div>
+            <div class="split">
+              <div class="field"><label for="category">Categoria</label>
+                <select id="category" name="category">
+                  <option value="Trattoria">Trattoria</option><option value="Pizzeria">Pizzeria</option><option value="Pesce">Pesce</option><option value="Carne">Carne</option><option value="Sushi">Sushi</option><option value="Brunch">Brunch</option><option value="Wine bar">Wine bar</option><option value="Fine dining">Fine dining</option><option value="Altro">Altro</option>
+                </select>
+              </div>
+              <div class="field"><label for="priceRange">Fascia di prezzo</label>
+                <select id="priceRange" name="priceRange"><option value="€">€</option><option value="€€" selected>€€</option><option value="€€€">€€€</option><option value="€€€€">€€€€</option></select>
+              </div>
+            </div>
+            <div class="field"><label for="address">Indirizzo</label><input id="address" name="address" placeholder="Via..., numero civico" /></div>
+            <div class="triple">
+              <div class="field"><label for="lat">Latitudine</label><input id="lat" name="lat" type="number" step="any" placeholder="38.1938" required /></div>
+              <div class="field"><label for="lng">Longitudine</label><input id="lng" name="lng" type="number" step="any" placeholder="15.5540" required /></div>
+              <div class="field"><label for="occasion">Occasione</label><input id="occasion" name="occasion" placeholder="Cena, pranzo, appuntamento..." /></div>
+            </div>
+            <div class="geo-row">
+              <button class="btn" type="button" id="geoBtn">Usa la mia posizione</button>
+              <button class="btn" type="button" id="lookupBtn">Compila da indirizzo</button>
+            </div>
+            <p class="helper">Puoi usare la tua posizione, compilare le coordinate dall'indirizzo oppure cliccare direttamente sulla mappa.</p>
+
+            <div class="stars-group">
+              <div class="stars-row" data-rating="location"><strong>Location</strong><div class="star-input"></div><span class="score-badge">0/5</span></div>
+              <div class="stars-row" data-rating="food"><strong>Cibo</strong><div class="star-input"></div><span class="score-badge">0/5</span></div>
+              <div class="stars-row" data-rating="price"><strong>Prezzo</strong><div class="star-input"></div><span class="score-badge">0/5</span></div>
+              <div class="stars-row" data-rating="overall"><strong>Generale</strong><div class="star-input"></div><span class="score-badge">0/5</span></div>
+            </div>
+
+            <div class="field"><label for="notes">Note personali</label><textarea id="notes" name="notes" placeholder="Piatti forti, atmosfera, rapporto qualità/prezzo, se ci torneresti..."></textarea></div>
+            <div class="field"><label for="photos">Foto del posto</label><input id="photos" name="photos" type="file" accept="image/*" multiple /><div class="photo-preview" id="photoPreview"></div></div>
+            <div class="split"><button class="btn btn-primary" type="submit">Salva nella guida</button><button class="btn" type="reset" id="resetBtn">Pulisci modulo</button></div>
+          </form>
+        </section>
+
+        <section>
+          <div class="content-grid">
+            <section class="panel map-panel">
+              <div class="map-top">
+                <div class="panel-head" style="margin-bottom:0">
+                  <div>
+                    <h2>Mappa privata</h2>
+                    <p class="sub">Mappa interna sempre visibile, con pin cliccabili e centro su Messina.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="map-shell">
+                <div id="mapbox" class="mapbox" aria-label="Mappa privata dei ristoranti visitati">
+                  <div class="map-grid" aria-hidden="true"></div>
+                  <div class="map-water" aria-hidden="true"></div>
+                  <div class="map-controls" aria-hidden="true">
+                    <div class="map-zoom">+</div>
+                    <div class="map-zoom">−</div>
+                  </div>
+                </div>
+                <div class="map-footer">
+                  <span class="map-chip">Centro iniziale: Messina</span>
+                  <span class="sub">Clicca sulla mappa per impostare coordinate. I pin sono posizionati in modo relativo sulle coordinate salvate.</span>
+                </div>
+              </div>
+            </section>
+
+            <aside class="panel">
+              <div class="panel-head"><div><h2>Classifica dei migliori</h2><p class="sub">Ordinata per rating generale, poi cibo.</p></div></div>
+              <div id="rankingList" class="ranking-list"></div>
+            </aside>
+          </div>
+
+          <section class="panel" style="margin-top:var(--space-6)">
+            <div class="toolbar">
+              <div class="search"><input id="searchInput" type="search" placeholder="Cerca per nome, città, categoria o note" aria-label="Cerca ristoranti" /><span aria-hidden="true">⌕</span></div>
+              <div class="legend"><span class="chip">Location</span><span class="chip">Cibo</span><span class="chip">Prezzo</span><span class="chip">Generale</span></div>
+            </div>
+            <div class="filter-row">
+              <div class="field"><label for="cityFilter">Filtro città</label><select id="cityFilter"><option value="">Tutte le città</option></select></div>
+              <div class="field"><label for="priceFilter">Filtro fascia prezzo</label><select id="priceFilter"><option value="">Tutte le fasce</option><option value="€">€</option><option value="€€">€€</option><option value="€€€">€€€</option><option value="€€€€">€€€€</option></select></div>
+              <div class="field"><label for="categoryFilter">Filtro categoria</label><select id="categoryFilter"><option value="">Tutte le categorie</option></select></div>
+            </div>
+            <div id="categoryPills" class="category-pills" style="margin:var(--space-4) 0 var(--space-5)"></div>
+            <div id="restaurantList" class="restaurant-list"></div>
+            <div id="emptyState" class="empty">Nessun ristorante trovato. Aggiungi il primo posto oppure allarga i filtri.</div>
+          </section>
+        </section>
+      </section>
+
+      <p class="footer-note">Questa versione usa una mappa integrata nel file stesso, per evitare problemi di visibilità e per essere più pratica da spostare e aprire come singolo HTML.</p>
+    </main>
+  </div>
+
+  <div class="overlay" id="detailOverlay" aria-hidden="true">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="sheet-top">
+        <div>
+          <div class="eyebrow" id="sheetCategory">Scheda ristorante</div>
+          <h2 id="sheetTitle">Dettaglio</h2>
+          <p class="sub" id="sheetMeta"></p>
+        </div>
+        <button class="icon-btn" type="button" id="closeSheet" aria-label="Chiudi scheda">✕</button>
+      </div>
+      <div class="sheet-grid">
+        <div><div id="sheetGallery" class="hero-gallery"></div></div>
+        <div class="detail-stack">
+          <div class="detail-line"><strong>Rating generale</strong><span id="sheetOverall"></span></div>
+          <div class="detail-line"><strong>Location</strong><span id="sheetLocation"></span></div>
+          <div class="detail-line"><strong>Cibo</strong><span id="sheetFood"></span></div>
+          <div class="detail-line"><strong>Prezzo</strong><span id="sheetPrice"></span></div>
+          <div class="detail-line"><strong>Fascia</strong><span id="sheetPriceRange"></span></div>
+          <div class="detail-line"><strong>Occasione</strong><span id="sheetOccasion"></span></div>
+          <div class="detail-line"><strong>Coordinate</strong><span id="sheetCoords"></span></div>
+          <div style="padding-top:var(--space-3)"><strong style="display:block;margin-bottom:var(--space-2)">Note personali</strong><p class="muted" id="sheetNotes" style="margin:0"></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'fdf-guide-private-restaurants-v3';
+    const form = document.getElementById('restaurantForm');
+    const listEl = document.getElementById('restaurantList');
+    const emptyEl = document.getElementById('emptyState');
+    const searchInput = document.getElementById('searchInput');
+    const photoInput = document.getElementById('photos');
+    const photoPreview = document.getElementById('photoPreview');
+    const latInput = document.getElementById('lat');
+    const lngInput = document.getElementById('lng');
+    const cityInput = document.getElementById('city');
+    const addressInput = document.getElementById('address');
+    const importInput = document.getElementById('importInput');
+    const exportBtn = document.getElementById('exportBtn');
+    const themeToggle = document.getElementById('themeToggle');
+    const geoBtn = document.getElementById('geoBtn');
+    const lookupBtn = document.getElementById('lookupBtn');
+    const rankingList = document.getElementById('rankingList');
+    const cityFilter = document.getElementById('cityFilter');
+    const priceFilter = document.getElementById('priceFilter');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const categoryPills = document.getElementById('categoryPills');
+    const detailOverlay = document.getElementById('detailOverlay');
+    const closeSheet = document.getElementById('closeSheet');
+    const mapbox = document.getElementById('mapbox');
+    const ratingRows = [...document.querySelectorAll('.stars-row')];
+
+    let transientMemory = null;
+    const state = {
+      restaurants: loadRestaurants(),
+      draftPhotos: [],
+      ratings: { location: 0, food: 0, price: 0, overall: 0 },
+      theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+      activeCategoryPill: '',
+      mapCenter: { lat: 38.1938, lng: 15.5540 },
+      mapScale: 2.4,
+      selectedId: null
+    };
+    document.documentElement.setAttribute('data-theme', state.theme);
+
+    function safeSetStorage(value){try{localStorage.setItem(STORAGE_KEY, JSON.stringify(value));}catch(e){transientMemory=JSON.stringify(value);}}
+    function safeGetStorage(){try{return localStorage.getItem(STORAGE_KEY)||transientMemory;}catch(e){return transientMemory;}}
+    function loadRestaurants(){try{const raw=safeGetStorage(); return raw?JSON.parse(raw):[];}catch(e){return [];}}
+    function saveRestaurants(){safeSetStorage(state.restaurants); renderAll();}
+    function escapeHtml(str=''){return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');}
+    function formatDate(value){if(!value) return ''; const d=new Date(value); return Number.isNaN(d.getTime())?value:d.toLocaleDateString('it-IT',{day:'2-digit',month:'short',year:'numeric'});}
+    function starSvg(){return '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>';}
+
+    function setupRatings(){ratingRows.forEach((row)=>{const type=row.dataset.rating; const container=row.querySelector('.star-input'); container.innerHTML=''; for(let i=1;i<=5;i++){const btn=document.createElement('button'); btn.type='button'; btn.className='star'; btn.innerHTML=starSvg(); btn.setAttribute('aria-label', `${type} ${i} stelle`); btn.addEventListener('click',()=>{state.ratings[type]=i; updateStars(type);}); container.appendChild(btn);} row.querySelector('.score-badge').textContent='0/5';});}
+    function updateStars(type){const row=ratingRows.find(r=>r.dataset.rating===type); const value=state.ratings[type]; [...row.querySelectorAll('.star')].forEach((star,idx)=>star.classList.toggle('active', idx<value)); row.querySelector('.score-badge').textContent=`${value}/5`;}
+    function resetRatings(){state.ratings={location:0,food:0,price:0,overall:0}; Object.keys(state.ratings).forEach(updateStars);}
+    function handlePhotoPreview(files){state.draftPhotos=[]; photoPreview.innerHTML=''; [...files].slice(0,10).forEach(file=>{const reader=new FileReader(); reader.onload=(e)=>{const src=e.target.result; state.draftPhotos.push(src); const el=document.createElement('div'); el.className='thumb'; el.innerHTML=`<img src="${src}" alt="Anteprima foto ristorante" loading="lazy" width="120" height="120">`; photoPreview.appendChild(el);}; reader.readAsDataURL(file);});}
+
+    function averageOverall(arr){if(!arr.length) return '0.0'; return (arr.reduce((sum,r)=>sum+Number(r.ratings.overall||0),0)/arr.length).toFixed(1);}    
+    function mostFrequent(arr,key){if(!arr.length) return '—'; const m={}; arr.forEach(r=>{const v=r[key]; if(v) m[v]=(m[v]||0)+1;}); const best=Object.entries(m).sort((a,b)=>b[1]-a[1])[0]; return best?best[0]:'—';}
+    function populateFilters(){const cities=[...new Set(state.restaurants.map(r=>r.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b)); const categories=[...new Set(state.restaurants.map(r=>r.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b)); cityFilter.innerHTML='<option value="">Tutte le città</option>'+cities.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join(''); categoryFilter.innerHTML='<option value="">Tutte le categorie</option>'+categories.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join(''); categoryPills.innerHTML=['Tutto',...categories].map(cat=>`<button class="btn ${((cat==='Tutto'&&!state.activeCategoryPill)||(cat===state.activeCategoryPill))?'btn-primary':''}" type="button" data-pill="${escapeHtml(cat==='Tutto'?'':cat)}">${escapeHtml(cat)}</button>`).join(''); [...categoryPills.querySelectorAll('button')].forEach(btn=>btn.addEventListener('click',()=>{state.activeCategoryPill=btn.dataset.pill; categoryFilter.value=btn.dataset.pill; renderList(); populateFilters();}));}
+    function getFilteredRestaurants(){const q=searchInput.value.trim().toLowerCase(); return state.restaurants.filter(r=>{const hay=[r.name,r.city,r.address,r.notes,r.category,r.occasion,r.priceRange].join(' ').toLowerCase(); return hay.includes(q)&&(!cityFilter.value||r.city===cityFilter.value)&&(!priceFilter.value||r.priceRange===priceFilter.value)&&(!categoryFilter.value||r.category===categoryFilter.value);}).sort((a,b)=>((b.ratings.overall||0)-(a.ratings.overall||0))||((b.ratings.food||0)-(a.ratings.food||0)));}
+
+    function latLngToXY(lat,lng){
+      const w = mapbox.clientWidth || 800;
+      const h = mapbox.clientHeight || 420;
+      const x = ((lng - state.mapCenter.lng) * state.mapScale) + (w/2);
+      const y = ((state.mapCenter.lat - lat) * state.mapScale * 1.35) + (h/2);
+      return { x: Math.max(18, Math.min(w-18, x)), y: Math.max(28, Math.min(h-18, y)) };
+    }
+    function xyToLatLng(x,y){
+      const w = mapbox.clientWidth || 800;
+      const h = mapbox.clientHeight || 420;
+      const lng = ((x - w/2) / state.mapScale) + state.mapCenter.lng;
+      const lat = state.mapCenter.lat - ((y - h/2) / (state.mapScale * 1.35));
+      return { lat, lng };
+    }
+    function renderMap(filtered=getFilteredRestaurants()){
+      [...mapbox.querySelectorAll('.map-marker')].forEach(n=>n.remove());
+      filtered.forEach(r=>{
+        if(!Number.isFinite(r.lat) || !Number.isFinite(r.lng)) return;
+        const {x,y}=latLngToXY(r.lat,r.lng);
+        const marker=document.createElement('button');
+        marker.type='button'; marker.className='map-marker'+(state.selectedId===r.id?' active':''); marker.style.left=`${x}px`; marker.style.top=`${y}px`; marker.setAttribute('aria-label', `${r.name}, ${r.city}`);
+        marker.innerHTML=`<span>${escapeHtml(r.name)}</span><div class="map-pin"></div>`;
+        marker.addEventListener('click',()=>{state.selectedId=r.id; renderMap(filtered); openSheet(r);});
+        mapbox.appendChild(marker);
+      });
+    }
+
+    function renderStats(){document.getElementById('totalCount').textContent=state.restaurants.length; document.getElementById('avgOverall').textContent=averageOverall(state.restaurants); document.getElementById('bestCity').textContent=mostFrequent(state.restaurants,'city'); document.getElementById('bestCategory').textContent=mostFrequent(state.restaurants,'category');}
+    function renderRanking(){const top=[...state.restaurants].sort((a,b)=>((b.ratings.overall||0)-(a.ratings.overall||0))||((b.ratings.food||0)-(a.ratings.food||0))).slice(0,5); rankingList.innerHTML=top.length?top.map((r,idx)=>`<div class="rank-item"><div style="display:flex;align-items:center;gap:12px"><div class="rank-badge">${idx+1}</div><div><strong>${escapeHtml(r.name)}</strong><div class="sub">${escapeHtml(r.city)} · ${escapeHtml(r.category||'')}</div></div></div><div style="text-align:right"><strong>${r.ratings.overall}/5</strong><div class="sub">${escapeHtml(r.priceRange||'')}</div></div></div>`).join(''):'<div class="empty" style="padding:var(--space-6)">La classifica apparirà dopo il primo ristorante salvato.</div>';}
+
+    function renderList(){const filtered=getFilteredRestaurants(); listEl.innerHTML=''; emptyEl.style.display=filtered.length?'none':'block'; filtered.forEach(r=>{const photos=(r.photos||[]).slice(0,4).map(src=>`<div class="thumb"><img src="${src}" alt="Foto di ${escapeHtml(r.name)}" loading="lazy" width="180" height="135"></div>`).join(''); const card=document.createElement('article'); card.className='card'; card.innerHTML=`<div class="card-body"><div class="card-header"><div><div style="display:flex;gap:var(--space-2);flex-wrap:wrap;align-items:center;margin-bottom:8px"><span class="chip active">${escapeHtml(r.category||'Altro')}</span><span class="price-pill">${escapeHtml(r.priceRange||'€€')}</span></div><h3>${escapeHtml(r.name)}</h3><div class="meta">${escapeHtml(r.city)}${r.address?' · '+escapeHtml(r.address):''}${r.visitedOn?' · '+formatDate(r.visitedOn):''}${r.occasion?' · '+escapeHtml(r.occasion):'' : ''}</div></div><div class="overall-pill">${r.ratings.overall}/5</div></div><div class="rating-grid"><div class="rating-box"><span>Location</span><strong>${r.ratings.location}/5</strong></div><div class="rating-box"><span>Cibo</span><strong>${r.ratings.food}/5</strong></div><div class="rating-box"><span>Prezzo</span><strong>${r.ratings.price}/5</strong></div><div class="rating-box"><span>Generale</span><strong>${r.ratings.overall}/5</strong></div></div>${r.notes?`<p class="muted" style="margin:0">${escapeHtml(r.notes)}</p>`:''}${photos?`<div class="gallery">${photos}</div>`:''}<div class="card-actions"><button class="btn" type="button" data-action="sheet" data-id="${r.id}">Apri scheda</button><button class="btn" type="button" data-action="focus" data-id="${r.id}">Vai sulla mappa</button><button class="btn" type="button" data-action="delete" data-id="${r.id}">Elimina</button></div></div>`; listEl.appendChild(card);}); renderMap(filtered);}
+    function renderAll(){renderStats(); populateFilters(); renderRanking(); renderList();}
+
+    async function geocodeAddress(){const address=addressInput.value.trim(); const city=cityInput.value.trim(); const query=[address,city].filter(Boolean).join(', '); if(!query){alert('Inserisci almeno indirizzo o città.'); return;} lookupBtn.disabled=true; lookupBtn.textContent='Cerco...'; try{const url=`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=${encodeURIComponent(query)}`; const res=await fetch(url,{headers:{'Accept':'application/json'}}); const data=await res.json(); if(!data.length) throw new Error('Nessun risultato'); const place=data[0]; latInput.value=Number(place.lat).toFixed(6); lngInput.value=Number(place.lon).toFixed(6); if(!cityInput.value && place.address?.city) cityInput.value=place.address.city;}catch(err){alert('Indirizzo non trovato. Prova con dati più precisi.');} finally{lookupBtn.disabled=false; lookupBtn.textContent='Compila da indirizzo';}}
+    function useCurrentLocation(){if(!navigator.geolocation){alert('La geolocalizzazione non è supportata da questo browser.'); return;} geoBtn.disabled=true; geoBtn.textContent='Cerco posizione...'; navigator.geolocation.getCurrentPosition((pos)=>{latInput.value=pos.coords.latitude.toFixed(6); lngInput.value=pos.coords.longitude.toFixed(6); geoBtn.disabled=false; geoBtn.textContent='Usa la mia posizione';},()=>{geoBtn.disabled=false; geoBtn.textContent='Usa la mia posizione'; alert('Autorizzazione negata o posizione non disponibile.');},{enableHighAccuracy:true,timeout:12000,maximumAge:60000});}
+
+    function openSheet(r){document.getElementById('sheetCategory').textContent=`${r.category||'Ristorante'} · ${r.priceRange||'€€'}`; document.getElementById('sheetTitle').textContent=r.name; document.getElementById('sheetMeta').textContent=`${r.city||''}${r.address?' · '+r.address:''}${r.visitedOn?' · '+formatDate(r.visitedOn):''}`; document.getElementById('sheetOverall').textContent=`${r.ratings.overall}/5`; document.getElementById('sheetLocation').textContent=`${r.ratings.location}/5`; document.getElementById('sheetFood').textContent=`${r.ratings.food}/5`; document.getElementById('sheetPrice').textContent=`${r.ratings.price}/5`; document.getElementById('sheetPriceRange').textContent=r.priceRange||'—'; document.getElementById('sheetOccasion').textContent=r.occasion||'—'; document.getElementById('sheetCoords').textContent=`${Number(r.lat).toFixed(5)}, ${Number(r.lng).toFixed(5)}`; document.getElementById('sheetNotes').textContent=r.notes||'Nessuna nota inserita.'; const gallery=document.getElementById('sheetGallery'); const photos=(r.photos||[]).length?r.photos:['data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><rect width="800" height="500" fill="%23efe4db"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23715659" font-family="Arial" font-size="32">Nessuna foto caricata</text></svg>']; gallery.innerHTML=photos.slice(0,5).map(src=>`<div class="thumb"><img src="${src}" alt="Foto di ${escapeHtml(r.name)}" loading="lazy" width="600" height="400"></div>`).join(''); detailOverlay.classList.add('open'); detailOverlay.setAttribute('aria-hidden','false');}
+    function closeSheetFn(){detailOverlay.classList.remove('open'); detailOverlay.setAttribute('aria-hidden','true');}
+
+    form.addEventListener('submit',(e)=>{e.preventDefault(); const data=new FormData(form); const restaurant={id:crypto.randomUUID(),name:data.get('name')?.toString().trim(),city:data.get('city')?.toString().trim(),visitedOn:data.get('visitedOn')?.toString()||'',category:data.get('category')?.toString()||'Altro',priceRange:data.get('priceRange')?.toString()||'€€',address:data.get('address')?.toString().trim(),occasion:data.get('occasion')?.toString().trim(),lat:Number(data.get('lat')),lng:Number(data.get('lng')),notes:data.get('notes')?.toString().trim(),photos:[...state.draftPhotos],ratings:{...state.ratings},createdAt:new Date().toISOString()}; if(!restaurant.name||!restaurant.city||!Number.isFinite(restaurant.lat)||!Number.isFinite(restaurant.lng)){alert('Inserisci almeno nome, città e coordinate valide.'); return;} if(!restaurant.ratings.overall){alert('Assegna almeno il rating generale.'); return;} state.restaurants.unshift(restaurant); saveRestaurants(); form.reset(); photoPreview.innerHTML=''; state.draftPhotos=[]; resetRatings();});
+    document.getElementById('resetBtn').addEventListener('click',()=>{photoPreview.innerHTML=''; state.draftPhotos=[]; resetRatings();});
+    photoInput.addEventListener('change',(e)=>handlePhotoPreview(e.target.files));
+    searchInput.addEventListener('input',renderList); cityFilter.addEventListener('change',renderList); priceFilter.addEventListener('change',renderList); categoryFilter.addEventListener('change',()=>{state.activeCategoryPill=categoryFilter.value; renderList(); populateFilters();}); geoBtn.addEventListener('click',useCurrentLocation); lookupBtn.addEventListener('click',geocodeAddress);
+    listEl.addEventListener('click',(e)=>{const btn=e.target.closest('button[data-action]'); if(!btn) return; const r=state.restaurants.find(x=>x.id===btn.dataset.id); if(!r) return; if(btn.dataset.action==='delete'){state.restaurants=state.restaurants.filter(x=>x.id!==r.id); saveRestaurants();} if(btn.dataset.action==='focus'){state.selectedId=r.id; renderMap(getFilteredRestaurants()); mapbox.scrollIntoView({behavior:'smooth', block:'center'});} if(btn.dataset.action==='sheet'){openSheet(r);}});
+    mapbox.addEventListener('click',(e)=>{if(e.target.closest('.map-marker')) return; const rect=mapbox.getBoundingClientRect(); const x=e.clientX-rect.left; const y=e.clientY-rect.top; const pos=xyToLatLng(x,y); latInput.value=pos.lat.toFixed(6); lngInput.value=pos.lng.toFixed(6); state.selectedId=null; renderMap(getFilteredRestaurants()); const ghost=document.createElement('div'); ghost.className='map-marker active'; ghost.style.left=`${x}px`; ghost.style.top=`${y}px`; ghost.innerHTML='<span>Nuovo punto</span><div class="map-pin"></div>'; mapbox.appendChild(ghost); setTimeout(()=>ghost.remove(), 1800);});
+    exportBtn.addEventListener('click',()=>{const blob=new Blob([JSON.stringify(state.restaurants,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='fdf-guide-export.json'; a.click(); URL.revokeObjectURL(a.href);});
+    importInput.addEventListener('change', async (e)=>{const file=e.target.files?.[0]; if(!file) return; try{const text=await file.text(); const data=JSON.parse(text); if(!Array.isArray(data)) throw new Error('Formato non valido'); state.restaurants=data; saveRestaurants();}catch(err){alert('Impossibile importare il file JSON.');} finally{importInput.value='';}});
+    themeToggle.addEventListener('click',()=>{document.documentElement.setAttribute('data-theme-manual','true'); state.theme=state.theme==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',state.theme);});
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change',(e)=>{if(!document.documentElement.hasAttribute('data-theme-manual')){state.theme=e.matches?'dark':'light'; document.documentElement.setAttribute('data-theme',state.theme);}});
+    closeSheet.addEventListener('click',closeSheetFn); detailOverlay.addEventListener('click',(e)=>{if(e.target===detailOverlay) closeSheetFn();}); document.addEventListener('keydown',(e)=>{if(e.key==='Escape') closeSheetFn();});
+    setupRatings(); resetRatings(); renderAll();
+  </script>
+<script>
+(function(){
+  const style = document.createElement('style');
+  style.textContent = `
+  .logo-mark{display:grid;place-items:center}
+  .logo-mark svg{overflow:visible}
+  `;
+  document.head.appendChild(style);
+})();
+</script>
+</body>
+</html>
